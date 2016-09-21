@@ -1,4 +1,4 @@
-from zip_by_address.zip_by_address_localizations.zip_by_address_israel import ZipByAddressIsrael
+from zip_by_address.zip_by_address_localizations.israel.zip_by_address_israel import ZipByAddressIsrael
 
 
 class ZipResolverFactory:

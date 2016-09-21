@@ -1,7 +1,7 @@
 import unittest
 
 from zip_by_address.address import Address
-from zip_by_address.zip_by_address_localizations.zip_by_address_israel import ZipByAddressIsrael
+from zip_by_address.zip_by_address_localizations.israel.zip_by_address_israel import ZipByAddressIsrael
 from zip_by_address.zip_by_address_resolver_ut_base import ZipByAddressResolverUtBase
 
 
