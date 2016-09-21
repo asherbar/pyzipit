@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pyzipit',
-    version='0.01',
+    version='0.02',
     packages=['zip_by_address', 'zip_by_address.zip_by_address_localizations'],
     url='https://github.com/asherbar/pyzipit',
     license='MIT',
