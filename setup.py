@@ -3,7 +3,11 @@ from distutils.core import setup
 setup(
     name='pyzipit',
     version='0.0.2',
-    packages=['zip_by_address', 'zip_by_address.zip_by_address_localizations'],
+    packages=[
+        'zip_by_address',
+        'zip_by_address.zip_by_address_localizations',
+        'zip_by_address.zip_by_address_localizations.israel'
+    ],
     url='https://github.com/asherbar/pyzipit/tarball/0.0.2',
     license='MIT',
     author='asherbar',
