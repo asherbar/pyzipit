@@ -20,22 +20,26 @@ class AddressByCoordinatesResolver:
             self.language)
         with urllib.request.urlopen(request_url) as response, \
                 io.TextIOWrapper(response, encoding=response.headers.get_content_charset('utf-8')) as f:
-            result = json.load(f)
-        if result['status'] != 'OK':
+            results = json.load(f)
+        if results['status'] != 'OK':
             raise RuntimeError('Unable to get address from coordinates ({}, {}). Request ended with status {}'.format(
-                self.latitude, self.longitude, result['status'])
+                self.latitude, self.longitude, results['status'])
             )
-        address_components = result['results'][0]['address_components']
-        country, state, city, street, street_number = [''] * 5
-        for component in address_components:
-            if 'street_number' in component['types']:
-                street_number = int(component['long_name'].split('-')[0])
-            elif 'route' in component['types']:
-                street = component['long_name']
-            elif 'locality' in component['types']:
-                city = component['long_name']
-            elif 'administrative_area_level_1' in component['types']:
-                state = component['long_name']
-            elif 'country' in component['types']:
-                country = component['long_name']
-        return Address(country, state, city, street, street_number)
+
+        desired_info = {address_part: '' for address_part in ('country', 'state', 'city', 'street', 'street_number')}
+        for result in results['results']:
+            address_components = result['address_components']
+            for component in address_components:
+                if 'street_number' in component['types'] and desired_info['street_number'] == '':
+                    desired_info['street_number'] = int(component['long_name'].split('-')[0])
+                elif 'route' in component['types'] and desired_info['street'] == '':
+                    desired_info['street'] = component['long_name']
+                elif 'locality' in component['types'] and desired_info['city'] == '':
+                    desired_info['city'] = component['long_name']
+                elif 'administrative_area_level_1' in component['types'] and desired_info['state'] == '':
+                    desired_info['state'] = component['long_name']
+                elif 'country' in component['types'] and desired_info['country'] == '':
+                    desired_info['country'] = component['long_name']
+                if all(desired_info.values()):
+                    break
+        return Address(**desired_info)
