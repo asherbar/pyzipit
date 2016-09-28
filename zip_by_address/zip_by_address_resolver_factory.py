@@ -7,7 +7,7 @@ class ZipResolverClsFactory:
     }
 
     def __init__(self, country):
-        self._country = country
+        self._country = country.lower()
 
     def create(self):
         zip_by_address_cls = self.country_to_zip_resolver.get(self._country)

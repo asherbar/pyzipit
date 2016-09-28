@@ -8,7 +8,7 @@ class AddressByCoordinatesClsFactory:
     }
 
     def __init__(self, country):
-        self._country = country
+        self._country = country.lower()
 
     def create(self):
         address_by_coordinates_cls = self.country_to_address_resolver.get(self._country)
