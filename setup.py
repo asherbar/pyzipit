@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pyzipit',
-    version='0.0.2.3',
+    version='0.0.3',
     packages=[
         'zip_by_address',
         'zip_by_address.zip_by_address_localizations',
@@ -11,7 +11,7 @@ setup(
         'zip_by_address.address_by_coordinates.address_by_coordinates_localizations',
         'zip_by_address.address_by_coordinates.address_by_coordinates_localizations.israel',
     ],
-    url='https://github.com/asherbar/pyzipit/tarball/0.0.2.3',
+    url='https://github.com/asherbar/pyzipit/tarball/0.0.3',
     license='MIT',
     author='asherbar',
     author_email='asherbare@gmail.com',
