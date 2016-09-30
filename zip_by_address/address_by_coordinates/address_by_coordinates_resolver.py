@@ -1,13 +1,12 @@
 import io
 import json
-import os
 import urllib.request
 
 from zip_by_address.address import Address
+from zip_by_address.geo_code_api_request_factory import GeoCodeApiRequestFactory
 
 
 class AddressByCoordinatesResolver:
-    _GM__REVERSE_JSON_ADDRESS = 'https://maps.googleapis.com/maps/api/geocode/json?&latlng'
 
     def __init__(self, language='en', latitude=-1, longitude=-1):
         self.language = language
@@ -15,9 +14,8 @@ class AddressByCoordinatesResolver:
         self.longitude = longitude
 
     def resolve_address(self):
-        request_url = '{}={},{}&key={}&language={}'.format(
-            self._GM__REVERSE_JSON_ADDRESS, self.latitude, self.longitude, os.environ['GOOGLE_MAPS_API_KEY'],
-            self.language)
+        request_url = GeoCodeApiRequestFactory().get_address_from_lat_long_request(self.latitude, self.longitude,
+                                                                                   self.language)
         with urllib.request.urlopen(request_url) as response, \
                 io.TextIOWrapper(response, encoding=response.headers.get_content_charset('utf-8')) as f:
             results = json.load(f)
