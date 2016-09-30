@@ -10,6 +10,7 @@ setup(
         'zip_by_address.address_by_coordinates',
         'zip_by_address.address_by_coordinates.address_by_coordinates_localizations',
         'zip_by_address.address_by_coordinates.address_by_coordinates_localizations.israel',
+        'zip_by_address.coordinates_by_address',
     ],
     url='https://github.com/asherbar/pyzipit/tarball/0.0.4',
     license='MIT',
